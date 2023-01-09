@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
+const path = require("path");
 
 mongoose
   .connect(
@@ -13,6 +14,7 @@ mongoose
   .then(() => {
     console.log("DB CONNECTED");
   });
+
 app.use(cors());
 // app.options("/api/create", function (req, res, next) {
 //   res.set("Allow", "POST");
@@ -20,7 +22,10 @@ app.use(cors());
 //   next(); // added line
 // });
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", userRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const port = 8000;
 

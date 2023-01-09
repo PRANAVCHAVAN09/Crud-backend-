@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema(
       maxlength: 20,
       trim: true,
     },
+    photo: {
+      data: Buffer,
+      contentType: String,
+    },
+    imageUrl: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
